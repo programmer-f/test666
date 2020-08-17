@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>reduce方法</title>
+</head>
+<body>
+<script>
+    let persons = [
+        {name:'Ted',age:5},
+        {name:'Lisa',age:8},
+        {name:'Ted',age:15},
+        ];
+    //前端对象数组 按某个属性去重
+     let obj = {};
+    persons = persons.reduce(function(item,next){
+        // console.log(item);
+
+        // console.log(obj[next.name]);
+        obj[next.name] ? '': obj[next.name] = true && item.push(next);
+        console.log(obj[next.name]);
+        // console.log(obj[next.name] = true && item.push(next));
+        // console.log(obj);
+        // console.log(item);
+        return item;
+    },[]);
+    // console.log(obj);
+    // console.log(persons);
+
+
+
+
+   /*
+    let obj = {};
+    persons = persons.reduce(function(item,next){
+        obj[next.name] ? '': obj[next.name] = true&&item.push(next);
+        return item;
+    },[]);
+    for(let i= 0;i<persons.length;i++){
+        console.log(jsonArray[i])
+    }
+    */
+
+    // let arr = [1, 2, 2, 4, null, null].reduce((accumulator, current) => {
+        //去重的思想：accumulator里面包含正在遍历的current，下一次accumulator保持不变
+       //             若accumulator里面不包含正在遍历的current，下一次accumulator就是accumulator.concat(current)
+
+        //简单概括：有就保持不变，没有就拼接作为下一次的accumulator
+        // return accumulator.includes(current) ? accumulator : accumulator.concat(current);
+    // }, []);
+    // console.log(arr);
+
+
+
+    //reduce做累加求和
+   // let res =  [1,2,3,4].reduce((accumulator,currentValue,currentIndex,arr)=>{
+   //      return accumulator += currentValue;
+   //  });
+    // console.log(res);
+
+
+
+    //利用set的特性来进行数组的去重
+    // let num = [...new Set([1,2,2,2,4,3])];
+    // console.log(num);
+
+
+    //有就保持不变，没有就拼接作为下一次的accumulator
+    // let arr666 = [1,2,2,3,4,4,5].reduce((accu,value,index,array)=>{
+    //     return accu.indexOf(value) !== -1 ? accu : accu.concat(value);
+    // },[]);
+    // console.log(arr666);
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /*消除空白间隙的方式：设置font-size（因为空白符本质是字符所以设置字体大小可清除）*/
+        #container{
+            font-size: 0;
+        }
+        /*一定要单独设置font-size，要不然继承font-size：0，字体就显示不出来了*/
+        .box{
+            width: 30%;
+            height: 100px;
+            display: inline-block;/*会引发空隙问题*/
+            text-align: center;
+            border: 1px solid #000;
+            margin-bottom: 20px;
+            font-size: 16px;
+            box-sizing: border-box;
+            padding-top: 25px;
+        }
+        .box p{
+            height: 25px;
+
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+
+
+</div>
+</body>
+
+<script>
+
+    //原数组
+    let arr = [
+        {name:'Ted',age:5},
+        {name:'Lisa',age:8},
+        {name:'Andy',age:31},
+        {name:'Peter',age:35},
+        {name:'Andrew',age:24},
+        {name:'Rose',age:30},
+        {name:'Violet',age:25},
+        {name:'Joe',age:17},
+        {name:'Mike',age:19},
+        {name:'Tee',age:22},
+        {name:'Dick',age:25},
+        {name:'Alex',age:28},
+        {name:'Frank',age:25},
+        {name:'CoCo',age:32},
+        {name:'TS',age:21},
+        {name:'Pink',age:25},
+        {name:'Justin',age:25},
+
+        //要去重的部分：name去重4个，name和age同时去重2个
+        {name:'Andrew',age:44},
+        {name:'Rose',age:45},
+        {name:'Andy',age:31},
+        {name:'Peter',age:35},
+    ];
+    //去除数组中age<20的对象
+    let newArr = arr.filter((value,index)=>{
+        return value.age >= 20;
+    });
+
+    let names = [];
+    let ages = [];
+    newArr.forEach(function (item,index) {
+        names.push(item.name);
+        ages.push(item.age);
+    });
+
+
+
+    //对象数组去重后最终要进行渲染的数组
+    let persons = newArr.filter(function (person,index) {
+        //1.对name进行去重
+        return names.indexOf(person.name) === index;
+
+        //2.当name和age都一致时去重
+        // let one = names.indexOf(person.name) === index;
+        // let two = ages.indexOf(person.age) === index;
+        // return one || two;
+
+
+        // 当name和age都一致时去重
+        // return names.indexOf(person.name) === index || ages.indexOf(person.age) === index;
+    });
+
+
+
+    //用最终的persons数组来渲染
+    for (let i = 0;i < persons.length; i++){
+        let str = `
+            <div class="box">
+                <p>${persons[i].name}</p>
+                <p>${persons[i].age}</p>
+            </div>
+                `;
+        container.innerHTML += str;
+    }
+
+</script>
+</html>
